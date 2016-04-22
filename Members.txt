@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 LIST OF MEMBERS FOR TEAM XXX
  
 MEMBER 1 NAME
@@ -7,11 +8,24 @@ MEMBER 1 NAME
 MEMBER 2 NAME
  
 MEMBER 3 Joshua Wong
+=======
+LIST OF MEMBERS FOR TEAM XXX
+ 
+MEMBER 2 Kevin Li
+ 
+MEMBER 3 NAME
+>>>>>>> origin/master
  
 =======
 LIST OF MEMBERS FOR TEAM XXX
  
+<<<<<<< HEAD
 MEMBER 1 Joshua Wong
+=======
+MEMBER 1
+
+ Keivn Li
+>>>>>>> origin/master
  
 MEMBER 2 NAME
  
@@ -19,6 +33,7 @@ MEMBER 3 NAME
  
 >>>>>>> origin/master
 MEMBER 4 NAME
+<<<<<<< HEAD
 =======
 LIST OF MEMBERS FOR TEAM XXX David Baker
  
@@ -29,4 +44,6 @@ MEMBER 2 NAME
 MEMBER 3 NAME
  
 MEMBER 4 David Baker
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
