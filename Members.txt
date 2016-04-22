@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 LIST OF MEMBERS FOR TEAM XXX
  
 MEMBER 1 NAME
@@ -6,4 +7,15 @@ MEMBER 2 Kevin Li
  
 MEMBER 3 NAME
  
+=======
+LIST OF MEMBERS FOR TEAM XXX
+ 
+MEMBER 1
+ Keivn Li
+ 
+MEMBER 2 NAME
+ 
+MEMBER 3 NAME
+ 
+>>>>>>> origin/master
 MEMBER 4 NAME
