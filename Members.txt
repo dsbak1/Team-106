@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 LIST OF MEMBERS FOR TEAM XXX
  
 MEMBER 1 NAME
@@ -18,3 +19,14 @@ MEMBER 3 NAME
  
 >>>>>>> origin/master
 MEMBER 4 NAME
+=======
+LIST OF MEMBERS FOR TEAM XXX David Baker
+ 
+MEMBER 1 Sammy Lim
+ 
+MEMBER 2 NAME
+ 
+MEMBER 3 NAME
+ 
+MEMBER 4 David Baker
+>>>>>>> origin/master
