@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-LIST OF MEMBERS FOR TEAM XXX
- 
-MEMBER 1 NAME
- 
-MEMBER 2 NAME
- 
-MEMBER 3 Joshua Wong
-=======
-LIST OF MEMBERS FOR TEAM XXX
- 
-MEMBER 2 Kevin Li
- 
-MEMBER 3 NAME
->>>>>>> origin/master
- 
-=======
+
 LIST OF MEMBERS FOR TEAM XXX
  
 <<<<<<< HEAD
