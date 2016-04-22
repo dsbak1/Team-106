@@ -1,9 +1,13 @@
-LIST OF MEMBERS FOR TEAM XXX
+LIST OF MEMBERS FOR TEAM XXX Sammy Lim
  
-MEMBER 1 NAME
+MEMBER 1 Sammy Lim
  
-MEMBER 2 Kevin Li
+MEMBER 2 NAME
  
 MEMBER 3 Joshua Wong
  
+<<<<<<< HEAD
+MEMBER 4 NAME
+=======
 MEMBER 4 David Baker
+>>>>>>> origin/master
