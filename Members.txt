@@ -6,5 +6,4 @@ MEMBER 2 Kevin Li
  
 MEMBER 3 NAME
  
-MEMBER 4 NAME
-6
+MEMBER 4 David Baker
