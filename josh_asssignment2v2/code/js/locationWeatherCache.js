@@ -65,6 +65,7 @@ function LocationWeatherCache() {
           longitude: longitude,
           forecasts: {}
         };
+        console.log("Adding location:" + JSON.stringify(newLocation));
 
         // Push new location onto the end of the locations array
         var newLength = locations.push(newLocation);
@@ -184,7 +185,7 @@ function loadLocations() {
   	if (locationWeatherCacheJSON != null) {
         // Item found in local storage, so let's load it
         locationWeatherCache.initialiseFromPDO(
-            JSON.parse(locationWeatherCacheString)
+            JSON.parse(locationWeatherCacheJSON)
         );
         console.log("Loaded locationWeatherCache")
     } else {
