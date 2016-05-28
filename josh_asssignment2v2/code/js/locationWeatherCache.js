@@ -28,14 +28,6 @@ function LocationWeatherCache() {
     var callbacks = {};
     // Public methods:
     
-    // TESTING - Need to Remove
-    //locations.push({
-    //      nickname: "Testing", 
-    //      latitude: 12.2345235, 
-    //      longitude: 15.3123,
-    //      forecasts: {}
-    //    });
-    
     // Returns the number of locations stored in the cache.
     //
   	this.length = function() {
@@ -52,10 +44,6 @@ function LocationWeatherCache() {
             console.log("No location at index!")
             return null
         }
-    };
-
-    this.locationAtIndexTEST = function(index) {
-        console.log(index);
     };
     
     // Given a latitude, longitude and nickname, this method saves a 
@@ -117,25 +105,19 @@ function LocationWeatherCache() {
     // 
   
     this.getWeatherAtIndexForDate = function(index, date, callback) {
-      	
-      	var property = locations[index].latitude + "," + locations[index].longitude + "," + date.forecastDateString();
+      	var location = this.locationAtIndex(index);
+        var property = location.latitude + "," + location.longitude + "," + date.forecastDateString();
       	if (location.forecasts.hasOwnProperty(property)) {
           	// If the location and date are cached return immediately
           	callback(index, locations[index].forecasts[property])
         } else {
-          	// This is a new date, so we need to use the API
-            //callbacks[property] = callback;
-            //jsonpRequest("https://api.forecast.io/forecast/" + API_KEY + "/", property ,data);
-          	var url = "https://api.forecast.io/forecast/" + API_KEY + "/" + property;
-          	$.getJSON(url, {format: "json", exclude: ["currently", "minutely", "hourly"]},
-            		function(data) {
-              			var result = JSON.parse(data);
-              			var weatherObject = result.daily;
-              			callback(index, weatherObject);
-            		}
-            )
-            
-            
+            // Save the callback function into the callbacks object
+            callbacks[property] = callback;
+            // Execute the jsonp request
+            var url = 'https://api.forecast.io/forecast/';
+            var script = document.createElement('script');
+            script.src = url + API_KEY + '/' + property + '/?units=si&exclude=["hourly","minutely","currently","flags"]&callback="locationWeatherCache.weatherResponse"';
+            document.body.appendChild(script);
         }
     };
     
@@ -146,19 +128,14 @@ function LocationWeatherCache() {
     // weather request.
     //
     this.weatherResponse = function(response) {
-      	var formattedTime = (new Date(response.daily.data[0].time*1000)).forecastDateString;
+        var formattedTime = (new Date(response.daily.data[0].time*1000)).forecastDateString();
         var key = response.latitude + "," + response.longitude + "," + formattedTime;
-        
         var index = indexForLocation(response.latitude, response.longitude);
-        var callback = callbacks[key];
         locations[index].forecasts[key] = response;
-       
         saveLocations();
         
+        var callback = callbacks[key];
         callback(index, response);
-        
-        
-        
     };
     // Private methods:
     
@@ -168,11 +145,9 @@ function LocationWeatherCache() {
     // returns -1.
     //
     function indexForLocation(latitude, longitude) {
-      	for (var index = 0; index < this.length; index++) {
-          	if (location[index].latitude == latitude) {
-              	if (location[index].longitude == longitude) {
-              			return index
-                }
+      	for (var index = 0; index < locations.length; index++) {
+          	if (locations[index].latitude == latitude && locations[index].longitude == longitude) {
+                return index
             }
         }
         return -1;
@@ -207,41 +182,3 @@ function saveLocations() {
     );
     console.log("Saved locationsWeatherCache")
 };
-
-var data = {
-    units: "si",
-    exclude: "hourly,flags",
-    callback: "locationWeatherCache.weatherResponse"
-};
-//jsonpRequest("https://api.forecast.io/forecast/" + API_KEY + "/", data);
-
-function jsonpRequest(url, key,data)
-{
-    // Build URL parameters from data object.
-    var params = "";
-    // For each key in data object...
-    for (var key in data)
-    {
-        if (data.hasOwnProperty(key))
-        {
-            if (params.length == 0)
-            {
-                // First parameter starts with '?'
-                params += "?";
-            }
-            else
-            {
-                // Subsequent parameter separated by '&'
-                params += "&";
-            }
-
-            var encodedKey = encodeURIComponent(key);
-            var encodedValue = encodeURIComponent(data[key]);
-
-            params += encodedKey + "=" + encodedValue;
-         }
-    }
-    var script = document.createElement('script');
-    script.src = url + key + params;
-    document.body.appendChild(script);
-}
