@@ -19,6 +19,8 @@ Date.prototype.forecastDateString = function() {
 // Code for LocationWeatherCache class and other shared code.
 // Prefix to use for Local Storage.  You may change this.
 var APP_PREFIX = "weatherApp";
+// This is where we'll save/load the locationWeatherCache object
+var LOCATION_WEATHER_CACHE_STORAGE = APP_PREFIX + "-locationWeatherCache"
 var API_KEY = "6979e4c00b693d0a3ef2ddb64e6a94ab";
 function LocationWeatherCache() {
     // Private attributes:
@@ -26,10 +28,18 @@ function LocationWeatherCache() {
     var callbacks = {};
     // Public methods:
     
+    // TESTING - Need to Remove
+    //locations.push({
+    //      nickname: "Testing", 
+    //      latitude: 12.2345235, 
+    //      longitude: 15.3123,
+    //      forecasts: {}
+    //    });
+    
     // Returns the number of locations stored in the cache.
     //
   	this.length = function() {
-    		return locatons.length
+    		return locations.length
     };
     
     // Returns the location object for a given index.
@@ -50,7 +60,7 @@ function LocationWeatherCache() {
     this.addLocation = function(latitude, longitude, nickname) {
         // Create the new location object	
         var newLocation = {
-          name: nickname, 
+          nickname: nickname, 
           latitude: latitude, 
           longitude: longitude,
           forecasts: {}
@@ -108,16 +118,16 @@ function LocationWeatherCache() {
           	callback(index, locations[index].forecasts[property])
         } else {
           	// This is a new date, so we need to use the API
-            callbacks[property] = callback;
-            jsonpRequest("https://api.forecast.io/forecast/" + API_KEY + "/", property ,data);
-          	/*var url = "https://api.forecast.io/forecast/" + API_KEY + "/" + property;
+            //callbacks[property] = callback;
+            //jsonpRequest("https://api.forecast.io/forecast/" + API_KEY + "/", property ,data);
+          	var url = "https://api.forecast.io/forecast/" + API_KEY + "/" + property;
           	$.getJSON(url, {format: "json", exclude: ["currently", "minutely", "hourly"]},
             		function(data) {
               			var result = JSON.parse(data);
               			var weatherObject = result.daily;
               			callback(index, weatherObject);
             		}
-            )*/
+            )
             
             
         }
@@ -167,26 +177,29 @@ function LocationWeatherCache() {
 //
 function loadLocations() {
   	// Initialise global variable
-  	locationWeatherCache = LocationWeatherCache()
+  	locationWeatherCache = new LocationWeatherCache()
     
     // Try loading from local storage
-    var locationWeatherCacheJSON = localStorage.getItem(APP_PREFIX);
+    var locationWeatherCacheJSON = localStorage.getItem(LOCATION_WEATHER_CACHE_STORAGE);
   	if (locationWeatherCacheJSON != null) {
         // Item found in local storage, so let's load it
         locationWeatherCache.initialiseFromPDO(
-        		JSON.parse(locationWeatherCacheString)
+            JSON.parse(locationWeatherCacheString)
         );
+        console.log("Loaded locationWeatherCache")
+    } else {
+        console.log("Couldn't load locationWeatherCache")
     }
-};
-
-loadFunctions()
+}
+loadLocations();
 
 // Save the singleton locationWeatherCache to Local Storage.
 //
 function saveLocations() {
- 	 	localStorage.setItem(
-    		APP_PREFIX, JSON.stringify(locationWeatherCache)
+    localStorage.setItem(
+        LOCATION_WEATHER_CACHE_STORAGE, JSON.stringify(locationWeatherCache)
     );
+    console.log("Saved locationsWeatherCache")
 };
 
 var data = {
