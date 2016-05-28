@@ -1,19 +1,25 @@
+function viewLocation(locationIndex)
+{
+    // Save the desired location to local storage
+    localStorage.setItem(APP_PREFIX + "-selectedLocation", locationIndex); 
+    // And load the view location page.
+    location.href = 'viewlocation.html';
+}
+
 // Code for the main app page (locations list).
 function main() {
   	var ul = document.getElementById("locationList");
   	
   	for (var index = 0; index < locationWeatherCache.length(); index++) {
       	var location = locationWeatherCache.locationAtIndex(index);
+        if (location == null) {
+            console.log("Failed to find location at index: " + index);
+            continue;
+        }
       	
       	var li = document.createElement("li");
       	li.className = "mdl-list__item mdl-list__item--two-line";
-      	li.onclick = function(){
-            console.log("got here")
-            // Save the desired location to local storage
-            localStorage.setItem(APP_PREFIX + "-selectedLocation", index); 
-            // And load the view location page.
-            window.location.href = 'viewlocation.html';
-        }
+        li.setAttribute("onclick", "viewLocation(" + index + ")");
       	ul.appendChild(li);
       
       	var firstSpan = document.createElement("span");

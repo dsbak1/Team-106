@@ -59,10 +59,10 @@ function addLocation()
         return;
     }
     
-    var nickName = document.getElementById("nickName").value;
-    if (nickName != "")
+    var nickname = document.getElementById("nickname").value;
+    if (nickname != "")
     {
-        locationWeatherCache.addLocation(currentLat, currentLong, nickName)
+        locationWeatherCache.addLocation(currentLat, currentLong, nickname)
     }
     else
     {

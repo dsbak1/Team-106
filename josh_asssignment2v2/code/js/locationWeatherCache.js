@@ -49,10 +49,15 @@ function LocationWeatherCache() {
         if (index < locations.length) {
           return locations[index];
         } else {
-          prompt("No location exists at that index")
+            console.log("No location at index!")
+            return null
         }
     };
-  
+
+    this.locationAtIndexTEST = function(index) {
+        console.log(index);
+    };
+    
     // Given a latitude, longitude and nickname, this method saves a 
     // new location into the cache.  It will have an empty 'forecasts'
     // property.  Returns the index of the added location.
@@ -80,7 +85,7 @@ function LocationWeatherCache() {
         if (index < locations.length) {
           locations.splice(index, 1);
         } else {
-          prompt("Can't remove saved location at given index")
+          console.log("Can't remove saved location at given index")
         }
     };
   
