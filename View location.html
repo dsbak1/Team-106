@@ -37,12 +37,14 @@
 				<div id="dateOut"></div>
 				<span style="color: white;">Powered by Google</span>
 				<div id="map" style="width: 60%; height: 80%; position: absolute; left: 5%;"></div>
-				<div id="weather" style="width: 25%; height: auto; position: absolute; right: 5%; background-color: blue;">
-					<h2>Weather</h2>
-					<p>Name</p>
-					<p>Name</p>
-					<p>Name</p>
-					<p>Name</p>
+				<div id="weather" style="width: 25%; height: auto; position: absolute; right: 5%;">
+					<h3 id="summaryTitle">Weather for </h3>
+					<p id="summary"><b>Summary: </b></p>
+					<p id="min"><b>Minimum: </b></p>
+					<p id="max"><b>Maximum: </b></p>
+					<p id="hum"><b>Humidity: </b></p>
+					<p id="wind"><b>Wind Speed: </b></p>
+					<button onclick="removeLocation()">Remove Location</button>
 				</div>
               </div>
             </div>
