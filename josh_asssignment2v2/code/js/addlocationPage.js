@@ -4,8 +4,13 @@ var currentLong = 144.96327999999994;
 var formattedAddress = null;
 
 var map = new google.maps.Map(
-    document.getElementById('map'), 
-    {zoom: 12, center: {lat: currentLat, lng: currentLong}}
+    document.getElementById('map'), {
+        zoom: 12,
+        center: {
+            lat: currentLat,
+            lng: currentLong
+        }
+    }
 );
 
 // Reset the values to their defaults
@@ -17,13 +22,13 @@ function reset() {
 }
 reset();
 
-function search()
-{
+function search() {
     var markRef = null
     var geocoder = new google.maps.Geocoder();
     var address = document.getElementById("locationInput").value;
-    geocoder.geocode(
-        {'address': address},
+    geocoder.geocode({
+            'address': address
+        },
         function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
                 if (markRef != null) {
@@ -38,7 +43,7 @@ function search()
                 var annotation = new google.maps.InfoWindow({
                     content: results[0].formatted_address
                 });
-                annotation.open(map,marker)
+                annotation.open(map, marker)
                 markRef = marker;
                 currentLat = results[0].geometry.location.lat();
                 currentLong = results[0].geometry.location.lng();
@@ -52,30 +57,25 @@ function search()
     );
 }
 
-function addLocation()
-{
+function addLocation() {
     if (formattedAddress == null) {
         window.alert("You must enter a valid location before you can add it!")
         return;
     }
-    
+
     var nickname = document.getElementById("nickname").value;
-    if (nickname != "")
-    {
+    if (nickname != "") {
         locationWeatherCache.addLocation(currentLat, currentLong, nickname)
-    }
-    else
-    {
+    } else {
         locationWeatherCache.addLocation(currentLat, currentLong, formattedAddress)
     }
-    
+
+    // Inform user that location has been added
+    window.alert("Location added")
+
     // Save the new location
     saveLocations();
-    
+
     // Return to the main page
     window.location.href = "index.html"
 }
-            
-
-    
-    
