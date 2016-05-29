@@ -40,7 +40,23 @@ function sliderInit() {
 function sliderChange() {
 	current = new Date(todayMilli - (day * document.getElementById("slider").value * -1))
 	document.getElementById("dateOut").innerHTML = current.simpleDateString()
+
+function currentWeather(index, data){
+    summary = data.weatherSummary;
+    document.getElementById("summary").innerHTML = "<b>Summary: </b>" + summary;
 	
+    minTemp = Math.round(data.minimumTemperature, 2) + '&deg;C';
+    document.getElementById("min").innerHTML = "<b>Minimum: </b>" + minTemp
+	
+    maxTemp = Math.round(data.maximumTemperature, 2) + '&deg;C';
+    document.getElementById("max").innerHTML = "<b>Maximum: </b>" + maxTemp
+	
+    humidity = Math.round(data.humidity * 100) + '%';
+    document.getElementById("hum").innerHTML = "<b>Humidity: </b>" + humidity
+	
+    windSpeed = Math.round(data.windSpeed, 2) + ' km/h';
+    document.getElementById("wind").innerHTML = "<b>Wind Speed: </b>" + windSpeed
+}	
 	//
 };
 
